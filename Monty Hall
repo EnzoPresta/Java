@@ -1,0 +1,357 @@
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner obj = new Scanner(System.in);
+        MetodosMontyHall met = new MetodosMontyHall();
+        String decision;
+        int op, vacia, totaljugado, totalganado, totalperdido, jugadosincambio = 0, ganadosincambio = 0, perdidosincambio = 0, jugadoconcambio = 0, ganadoconcambio = 0, perdidoconcambio = 0, vecespuerta1 = 0, vecespuerta2 = 0, vecespuerta3 = 0;
+
+        do {
+            ArrayList<Integer> puertas = new ArrayList<>();
+            puertas = met.devuelvePuertas();
+            System.out.println("");
+            System.out.println("#######################");
+            System.out.println("#### Juego Monty Hall ####");
+            System.out.println("#######################");
+            System.out.println("");
+            System.out.println("Elige una puerta");
+            System.out.println("> 1 <");
+            System.out.println("> 2 <");
+            System.out.println("> 3 <");
+            System.out.println("Pulsa 0 para dejar de jugar");
+
+            op = obj.nextInt();
+
+            switch (op) {
+                case 1:
+                    vecespuerta1++;
+                    if (puertas.get(0) == 0) {
+                        if (puertas.get(1) == 1) {
+                            System.out.println("La puerta 3 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 1 <");
+                            System.out.println("> 2 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 2");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 1");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadosincambio++;
+                                perdidosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 2");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadoconcambio++;
+                                ganadoconcambio++;
+                            }
+                        }
+                        if (puertas.get(2) == 1) {
+                            System.out.println("La puerta 2 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 1 <");
+                            System.out.println("> 3 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 3");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 1");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadosincambio++;
+                                perdidosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 3");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadoconcambio++;
+                                ganadoconcambio++;
+                            }
+                        }
+                    }
+                    if (puertas.get(0) == 1) {
+                        vacia = met.abierta();
+                        if (vacia == 1) {
+                            System.out.println("");
+                            System.out.println("La puerta 2 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 1 <");
+                            System.out.println("> 3 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 3");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 1");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadosincambio++;
+                                ganadosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 3");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadoconcambio++;
+                                perdidoconcambio++;
+                            }
+                        }
+                        if (vacia == 2) {
+                            System.out.println("");
+                            System.out.println("La puerta 3 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 1 <");
+                            System.out.println("> 2 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 3");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 1");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadosincambio++;
+                                ganadosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 2");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadoconcambio++;
+                                perdidoconcambio++;
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    vecespuerta2++;
+                    if (puertas.get(1) == 0) {
+                        if (puertas.get(0) == 1) {
+                            System.out.println("");
+                            System.out.println("La puerta 3 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 1 <");
+                            System.out.println("> 2 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 1");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 2");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadosincambio++;
+                                perdidosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 1");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadoconcambio++;
+                                ganadoconcambio++;
+                            }
+                        }
+                        if (puertas.get(2) == 1) {
+                            System.out.println("");
+                            System.out.println("La puerta 1 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 2 <");
+                            System.out.println("> 3 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 3");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 2");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadosincambio++;
+                                perdidosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 3");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadoconcambio++;
+                                ganadoconcambio++;
+                            }
+                        }
+                    }
+                    if (puertas.get(1) == 1) {
+                        vacia = met.abierta();
+                        if (vacia == 1) {
+                            System.out.println("");
+                            System.out.println("La puerta 3 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 1 <");
+                            System.out.println("> 2 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 1");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 2");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadosincambio++;
+                                ganadosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 1");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadoconcambio++;
+                                perdidoconcambio++;
+                            }
+                        }
+                        if (vacia == 2) {
+                            System.out.println("");
+                            System.out.println("La puerta 1 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 2 <");
+                            System.out.println("> 3 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 3");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 2");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadosincambio++;
+                                ganadosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 3");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadoconcambio++;
+                                perdidoconcambio++;
+                            }
+                        }
+                    }
+                    break;
+                case 3:
+                    vecespuerta3++;
+                    if (puertas.get(2) == 0) {
+                        if (puertas.get(0) == 1) {
+                            System.out.println("");
+                            System.out.println("La puerta 2 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 1 <");
+                            System.out.println("> 3 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 1");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 3");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadosincambio++;
+                                perdidosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 1");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadoconcambio++;
+                                ganadoconcambio++;
+                            }
+                        }
+                        if (puertas.get(1) == 1) {
+                            System.out.println("");
+                            System.out.println("La puerta 1 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 2 <");
+                            System.out.println("> 3 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 2");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 3");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadosincambio++;
+                                perdidosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 2");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadoconcambio++;
+                                ganadoconcambio++;
+                            }
+                        }
+                    }
+                    if (puertas.get(2) == 1) {
+                        vacia = met.abierta();
+                        if (vacia == 1) {
+                            System.out.println("");
+                            System.out.println("La puerta 1 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 2 <");
+                            System.out.println("> 3 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 2");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 3");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadosincambio++;
+                                ganadosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 2");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadoconcambio++;
+                                perdidoconcambio++;
+                            }
+                        }
+                        if (vacia == 2) {
+                            System.out.println("");
+                            System.out.println("La puerta 2 esta vacia");
+                            System.out.println("Quedan las puertas:");
+                            System.out.println("> 1 <");
+                            System.out.println("> 3 <");
+                            System.out.println("Mantienes tu decision? Pulsa S, en caso contrario cambiaras a la puerta 1");
+                            decision = obj.next();
+                            if ("S".equals(decision)) {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 3");
+                                System.out.println("Hay un Mercedes-Benz adentro");
+                                System.out.println("#### GANASTE ####");
+                                jugadosincambio++;
+                                ganadosincambio++;
+                            } else {
+                                System.out.println("");
+                                System.out.println("Abriste la puerta 1");
+                                System.out.println("Esta vacia");
+                                System.out.println("#### Derrota ####");
+                                jugadoconcambio++;
+                                perdidoconcambio++;
+                            }
+                        }
+                    }
+
+            }
+            totaljugado = met.suma(jugadoconcambio, jugadosincambio);
+            totalganado = met.suma(ganadoconcambio, ganadosincambio);
+            totalperdido = met.suma(perdidoconcambio, perdidosincambio);
+            System.out.println("");
+            System.out.println("##### Puntuacion #####");
+            System.out.println("\t Jugados\t Ganados\t Perdidos");
+            System.out.println("Totales\t" + totaljugado + "\t" + totalganado + "\t" + totalperdido);
+            System.out.println("Con cambio\t" + jugadoconcambio + "\t" + ganadoconcambio + "\t" + perdidoconcambio);
+            System.out.println("Sin cambio\t" + jugadosincambio + "\t" + ganadosincambio + "\t" + perdidosincambio);
+            System.out.println("------------------------------------------");
+            System.out.println("Veces elegida puerta 1:\t" + vecespuerta1);
+            System.out.println("Veces elegida puerta 2:\t" + vecespuerta2);
+            System.out.println("Veces elegida puerta 3:\t" + vecespuerta3);
+            System.out.println("");
+
+        } while (op != 0);
+    }
+}
