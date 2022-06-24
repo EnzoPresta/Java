@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+
+public class MetodosMontyHall {
+    ArrayList devuelvePuertas(){
+    ArrayList<Integer> puertas = new ArrayList<>();
+        puertas.add(0);
+        puertas.add(0);
+        puertas.add(1);
+        Collections.shuffle(puertas);
+        return puertas;
+}
+    int abierta(){
+        int numero = (int)(Math.random()*2+1);
+        return numero;
+        
+    }
+    int suma(int uno, int dos) {
+         int score = uno + dos;
+            return score;
+        }
+    }
