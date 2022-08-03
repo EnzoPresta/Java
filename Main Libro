@@ -1,0 +1,14 @@
+package pkg2dobx;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Libro lib1 = new Libro(817525766, "Charcos en el camino", "Jorge Campos", 255);
+        Libro lib2 = new Libro(758835975, "El valle de los yetis", "Timmel Gunnarson", 302);
+        System.out.println(lib1.toString());
+        System.out.println(lib2.toString());
+        
+        System.out.println(lib1.maspaginas(lib2));
+    }
+}
