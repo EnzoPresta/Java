@@ -1,0 +1,56 @@
+package pkg2dobx;
+
+public class Cuenta {
+
+    private String titular;
+    private double monto;
+
+    public Cuenta(String tit) {
+        titular = tit;
+        monto = 0;
+    }
+
+    public Cuenta(String tit, double mont) {
+        titular = tit;
+        monto = mont;
+
+    }
+
+    public String getTitular() {
+        return titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    @Override
+    public String toString() {
+        String mensaje = "El titular de la cuenta es " + titular + " y el monto es " + monto;
+        return mensaje;
+    }
+
+    public double ingresar(double cantidad) {
+        if (cantidad > 0) {
+            monto = monto + cantidad;
+        }
+        return monto;
+    }
+
+    public double retirar(double cantidad) {
+        monto = monto - cantidad;
+        if (monto < 0) {
+            monto = 0;
+        }
+        return monto;
+    }
+
+}
