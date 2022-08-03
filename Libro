@@ -1,0 +1,63 @@
+package pkg2dobx;
+
+public class Libro {
+
+    private int ISBN;
+    private String Titulo;
+    private String Autor;
+    private int Nropaginas;
+
+    public Libro(int isbn, String tit, String aut, int nropag) {
+        ISBN = isbn;
+        Titulo = tit;
+        Autor = aut;
+        Nropaginas = nropag;
+    }
+
+    @Override
+    public String toString() {
+        String mensaje = "El libro " + Titulo + " con ISBN " + ISBN + " creado por el autor " + Autor + " tiene " + Nropaginas + " paginas";
+        return mensaje;
+
+    }
+
+    public void setISBN(int ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public void setTitulo(String Titulo) {
+        this.Titulo = Titulo;
+    }
+
+    public void setAutor(String Autor) {
+        this.Autor = Autor;
+    }
+
+    public void setNropaginas(int Nropaginas) {
+        this.Nropaginas = Nropaginas;
+    }
+
+    public int getISBN() {
+        return ISBN;
+    }
+
+    public String getTitulo() {
+        return Titulo;
+    }
+
+    public String getAutor() {
+        return Autor;
+    }
+
+    public int getNropaginas() {
+        return Nropaginas;
+    }
+    
+    public String maspaginas (Libro OtroLibro){
+        if(this.Nropaginas > OtroLibro.getNropaginas()){
+            return this.Titulo + " tiene mas paginas que " + OtroLibro.getTitulo();
+        } else {
+            return OtroLibro.getTitulo() + " tiene mas paginas que " + this.Titulo;
+        }
+    }
+}
