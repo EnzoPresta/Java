@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class Alumno {
+
+    private String nombre;
+    private int edad;
+
+    public Alumno() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese nombre y apellido");
+        nombre = sc.nextLine();
+        System.out.println("Ingrese edad");
+        edad = sc.nextInt();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    @Override
+    public String toString() {
+        String mensaje = "El alumno se llama " + nombre + " y tiene " + edad + " años";
+        return mensaje;
+    }
+
+    public void esMayor() {
+        if (this.edad >= 18) {
+            System.out.println("El alumno " + nombre + " es mayor de edad");
+        } else {
+            System.out.println("El alumno " + nombre + " es menor de edad");
+        }
+    }
+
+}
+
+public class MainAlumno {
+
+    public static void main(String[] args) {
+        
+        Alumno al1 = new Alumno();
+        System.out.println(al1.toString());
+        al1.esMayor();
+    }
+    
+}
