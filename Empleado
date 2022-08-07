@@ -40,6 +40,8 @@ public class Empleado {
 
 }
 
+----------------------------------------------------------------------------------------
+
 import java.util.Scanner;
 
 public class MainEmpleado {
