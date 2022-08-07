@@ -1,0 +1,65 @@
+public class Empleado {
+
+    private String nombre;
+    private double sueldo;
+
+    public Empleado(String nombre, double sueldo) {
+        this.nombre = nombre;
+        this.sueldo = sueldo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getSueldo() {
+        return sueldo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setSueldo(double sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    @Override
+    public String toString() {
+        String mensaje = "El empleado se llama " + nombre + " y recibe " + sueldo + " pesos de salario";
+        return mensaje;
+    }
+
+    public String impuesto(double sueldo) {
+        if (sueldo > 3000) {
+            return nombre + " debe pagar impuestos";
+        } else {
+            return nombre + " no debe pagar impuestos";
+        }
+    }
+
+}
+
+import java.util.Scanner;
+
+public class MainEmpleado {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        String nombre;
+        double sueldo;
+
+        System.out.println("Ingrese nombre y apellido");
+        nombre = sc.nextLine();
+        System.out.println("Ingrese salario");
+        sueldo = sc.nextDouble();
+
+        Empleado emp1 = new Empleado(nombre, sueldo);
+        
+        System.out.println(emp1.toString());
+        
+        System.out.println(emp1.impuesto(sueldo));
+    }
+
+}
