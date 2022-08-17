@@ -1,0 +1,138 @@
+package pkg2dobx;
+
+import java.util.*;
+
+public class MainBanco {
+
+    public static void main(String[] args) {
+        String nombre;
+        int cantidad, tipo;
+
+        Banco banco1 = new Banco();
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Roberto");
+        System.out.println("Lucia");
+        System.out.println("Francisco");
+        System.out.println("");
+        System.out.println("Ingrese nombre");
+        nombre = sc.nextLine();
+        if (nombre.equals("Roberto")) {
+            System.out.println("Ingrese cantidad");
+            cantidad = sc.nextInt();
+            System.out.println("Ingrese 1 para depositar, ingrese 2 para extraer");
+            tipo = sc.nextInt();
+            if (tipo == 1) {
+                banco1.operar(banco1.getCliente1(), cantidad, 1);
+            }
+            if (tipo == 2) {
+                banco1.operar(banco1.getCliente1(), cantidad, 2);
+            }
+        } else {
+            System.out.println("El cliente no existe");
+        }
+
+        System.out.println("El saldo de Roberto es de " + banco1.getCliente1().getMonto());
+
+        System.out.println(banco1.depositosTotales());
+
+    }
+
+}
+---------------------------------------------------------------------------------------------------------------------
+
+/* CLIENTE */
+
+package pkg2dobx;
+
+public class Cliente {
+
+    private String nombre;
+    private int monto;
+
+    public Cliente(String nombre) {
+        this.nombre = nombre;
+        monto = 0;
+
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getMonto() {
+        return monto;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setMonto(int monto) {
+        this.monto = monto;
+    }
+    
+    public void depositar(int cantidad){
+         monto = monto + cantidad;
+    }
+    
+    public void extraer(int cantidad){
+        monto = monto - cantidad;
+    }
+
+}
+--------------------------------------------------------------------------------------------------------------
+/* BANCO */
+
+
+package pkg2dobx;
+
+public class Banco {
+
+    private Cliente cliente1, cliente2, cliente3;
+    
+    public Banco(){
+        cliente1 = new Cliente("Roberto");
+        cliente2 = new Cliente("Lucia");
+        cliente3 = new Cliente("Francisco");
+    }
+
+    public Cliente getCliente1() {
+        return cliente1;
+    }
+
+    public Cliente getCliente2() {
+        return cliente2;
+    }
+
+    public Cliente getCliente3() {
+        return cliente3;
+    }
+
+    public void setCliente1(Cliente cliente1) {
+        this.cliente1 = cliente1;
+    }
+
+    public void setCliente2(Cliente cliente2) {
+        this.cliente2 = cliente2;
+    }
+
+    public void setCliente3(Cliente cliente3) {
+        this.cliente3 = cliente3;
+    }
+    
+    public void operar(Cliente cli, int cantidad, int tipo){
+        if (tipo == 1){
+            cli.depositar(cantidad);
+        }
+        if (tipo == 2){
+            cli.extraer(cantidad);
+        } 
+        
+    }
+    
+    public int depositosTotales(){
+        int total = cliente1.getMonto() + cliente2.getMonto() + cliente3.getMonto();
+        return total;
+    }
+}
