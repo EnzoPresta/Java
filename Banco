@@ -5,40 +5,66 @@ import java.util.*;
 public class MainBanco {
 
     public static void main(String[] args) {
-        String nombre;
-        int cantidad, tipo;
+        Scanner sc = new Scanner(System.in);
 
         Banco banco1 = new Banco();
+        Cliente cli1 = new Cliente("Roberto");
+        Cliente cli2 = new Cliente("Lucia");
+        Cliente cli3 = new Cliente("Francisco");
+        banco1.agregar(cli1);
+        banco1.agregar(cli2);
+        banco1.agregar(cli3);
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Roberto");
-        System.out.println("Lucia");
-        System.out.println("Francisco");
-        System.out.println("");
-        System.out.println("Ingrese nombre");
-        nombre = sc.nextLine();
-        if (nombre.equals("Roberto")) {
-            System.out.println("Ingrese cantidad");
-            cantidad = sc.nextInt();
-            System.out.println("Ingrese 1 para depositar, ingrese 2 para extraer");
-            tipo = sc.nextInt();
-            if (tipo == 1) {
-                banco1.operar(banco1.getCliente1(), cantidad, 1);
+            banco1.mostrarClientes();
+            System.out.println("");
+            System.out.println("Ingrese nombre");
+            String nombre = sc.nextLine();
+            if (nombre.equals("Roberto")) {
+                System.out.println("Ingrese cantidad");
+                int cantidad = sc.nextInt();
+                System.out.println("Ingrese 1 para depositar, ingrese 2 para extraer");
+                int tipo = sc.nextInt();
+                if (tipo == 1) {
+                    banco1.operar(cli1, cantidad, 1);
+                }
+                if (tipo == 2) {
+                    banco1.operar(cli1, cantidad, 2);
+                }
             }
-            if (tipo == 2) {
-                banco1.operar(banco1.getCliente1(), cantidad, 2);
+            if (nombre.equals("Lucia")) {
+                System.out.println("Ingrese cantidad");
+                int cantidad = sc.nextInt();
+                System.out.println("Ingrese 1 para depositar, ingrese 2 para extraer");
+                int tipo = sc.nextInt();
+                if (tipo == 1) {
+                    banco1.operar(cli2, cantidad, 1);
+                }
+                if (tipo == 2) {
+                    banco1.operar(cli2, cantidad, 2);
+                }
             }
-        } else {
-            System.out.println("El cliente no existe");
+            if (nombre.equals("Francisco")) {
+                System.out.println("Ingrese cantidad");
+                int cantidad = sc.nextInt();
+                System.out.println("Ingrese 1 para depositar, ingrese 2 para extraer");
+                int tipo = sc.nextInt();
+                if (tipo == 1) {
+                    banco1.operar(cli3, cantidad, 1);
+                }
+                if (tipo == 2) {
+                    banco1.operar(cli3, cantidad, 2);
+                }
+            }
+
+            System.out.println("El saldo de Roberto es de " + cli1.getMonto());
+            System.out.println("El saldo de Lucia es de " + cli2.getMonto());
+            System.out.println("El saldo de Francisco es de " + cli3.getMonto());
+            banco1.depositosTotales();
+            
+            
         }
-
-        System.out.println("El saldo de Roberto es de " + banco1.getCliente1().getMonto());
-
-        System.out.println(banco1.depositosTotales());
-
     }
 
-}
 ---------------------------------------------------------------------------------------------------------------------
 
 /* CLIENTE */
@@ -53,7 +79,6 @@ public class Cliente {
     public Cliente(String nombre) {
         this.nombre = nombre;
         monto = 0;
-
     }
 
     public String getNombre() {
@@ -71,15 +96,21 @@ public class Cliente {
     public void setMonto(int monto) {
         this.monto = monto;
     }
-    
-    public void depositar(int cantidad){
-         monto = monto + cantidad;
-    }
-    
-    public void extraer(int cantidad){
-        monto = monto - cantidad;
+
+    public void depositar(int cantidad) {
+        monto = monto + cantidad;
     }
 
+    public void extraer(int cantidad) {
+        monto = monto - cantidad;
+    }
+    
+      @Override
+    public String toString() {
+        String mensaje = nombre;
+        return mensaje;
+
+    }
 }
 --------------------------------------------------------------------------------------------------------------
 /* BANCO */
@@ -87,52 +118,40 @@ public class Cliente {
 
 package pkg2dobx;
 
+import java.util.*;
+
 public class Banco {
 
-    private Cliente cliente1, cliente2, cliente3;
-    
-    public Banco(){
-        cliente1 = new Cliente("Roberto");
-        cliente2 = new Cliente("Lucia");
-        cliente3 = new Cliente("Francisco");
+    private ArrayList<Cliente> Clientes;
+
+    public Banco() {
+        Clientes = new ArrayList<>();
     }
 
-    public Cliente getCliente1() {
-        return cliente1;
+    public void agregar(Cliente cliente) {
+        this.Clientes.add(cliente);
     }
 
-    public Cliente getCliente2() {
-        return cliente2;
+    public void mostrarClientes() {
+        for (int i = 0; i < Clientes.size(); i++) {
+            System.out.println(Clientes.get(i));
+        }
     }
 
-    public Cliente getCliente3() {
-        return cliente3;
-    }
-
-    public void setCliente1(Cliente cliente1) {
-        this.cliente1 = cliente1;
-    }
-
-    public void setCliente2(Cliente cliente2) {
-        this.cliente2 = cliente2;
-    }
-
-    public void setCliente3(Cliente cliente3) {
-        this.cliente3 = cliente3;
-    }
-    
-    public void operar(Cliente cli, int cantidad, int tipo){
-        if (tipo == 1){
+    public void operar(Cliente cli, int cantidad, int tipo) {
+        if (tipo == 1) {
             cli.depositar(cantidad);
         }
-        if (tipo == 2){
+        if (tipo == 2) {
             cli.extraer(cantidad);
-        } 
-        
+        }
     }
-    
-    public int depositosTotales(){
-        int total = cliente1.getMonto() + cliente2.getMonto() + cliente3.getMonto();
-        return total;
+
+    public void depositosTotales() {
+        int suma = 0;
+        for (Cliente cli : Clientes) {
+            suma += cli.getMonto();
+        }
+        System.out.println("Los depósitos totales del banco son de " + suma);
     }
 }
