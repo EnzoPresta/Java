@@ -1,0 +1,99 @@
+import java.util.*;
+
+public class Club {
+
+    private ArrayList<Socio> Socios;
+    private ArrayList<Integer> Antigüedades;
+
+    public Club() {
+
+        Socios = new ArrayList<>();
+        Antigüedades = new ArrayList<>();
+    }
+
+    public void agregar(Socio socio) {
+        this.Socios.add(socio);
+    }
+
+    /*public void mayorAntigüedad(Socio socio1, Socio socio2, Socio socio3) {
+
+        if (socio1.getAntigüedad() > socio2.getAntigüedad() && socio1.getAntigüedad() > socio3.getAntigüedad()) {
+            System.out.println("El socio más antiguo es " + socio1.getNombre() + " con " + socio1.getAntigüedad() + " años de antigüedad");
+        }
+        if (socio2.getAntigüedad() > socio1.getAntigüedad() && socio2.getAntigüedad() > socio3.getAntigüedad()) {
+            System.out.println("El socio más antiguo es " + socio1.getNombre() + " con " + socio1.getAntigüedad() + " años de antigüedad");
+        }
+        if (socio3.getAntigüedad() > socio1.getAntigüedad() && socio3.getAntigüedad() > socio2.getAntigüedad()) {
+            System.out.println("El socio más antiguo es " + socio1.getNombre() + " con " + socio1.getAntigüedad() + " años de antigüedad");
+        }
+    }*/
+
+    public void mayorAntigüedad2() {
+
+        for (Socio soc : Socios) {
+            Antigüedades.add(soc.getAntigüedad());
+        }
+        int mayor = Collections.max(Antigüedades);
+        for (Socio soc : Socios) {
+            if (soc.getAntigüedad() == mayor) {
+                System.out.println("El socio más antiguo es " + soc.getNombre() + " con " + soc.getAntigüedad() + " años de antigüedad");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Club CNDEF = new Club();
+        Socio socio1 = new Socio();
+        Socio socio2 = new Socio();
+        Socio socio3 = new Socio();
+
+        CNDEF.agregar(socio1);
+        CNDEF.agregar(socio2);
+        CNDEF.agregar(socio3);
+
+        //CNDEF.mayorAntigüedad(socio1, socio2, socio3);
+        CNDEF.mayorAntigüedad2();
+
+    }
+}
+--------------------------------------------------------------------------------------------------------
+
+import java.util.*;
+
+public class Socio {
+
+    private String nombre;
+    private int antigüedad;
+
+    public Socio() {
+        Scanner sc = new Scanner (System.in);
+        System.out.println("Ingrese nombre de socio");
+        nombre = sc.nextLine();
+        System.out.println("Ingrese años de antigüedad");
+        antigüedad = sc.nextInt();
+    }
+
+    @Override
+    public String toString() {
+        String mensaje = "El socio " + nombre + " tiene una antigüedad de " + antigüedad + " años";
+        return mensaje;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getAntigüedad() {
+        return antigüedad;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setAntigüedad(int antigüedad) {
+        this.antigüedad = antigüedad;
+    }
+
+}
