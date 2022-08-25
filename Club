@@ -36,7 +36,7 @@ public class Club {
         int mayor = Collections.max(Antigüedades);
         for (Socio soc : Socios) {
             if (soc.getAntigüedad() == mayor) {
-                System.out.println("El socio más antiguo es " + soc.getNombre() + " con " + soc.getAntigüedad() + " años de antigüedad");
+                System.out.println(soc.getNombre() + " con " + soc.getAntigüedad() + " años de antigüedad");
             }
         }
     }
@@ -53,6 +53,8 @@ public class Club {
         CNDEF.agregar(socio3);
 
         //CNDEF.mayorAntigüedad(socio1, socio2, socio3);
+        
+        System.out.println("El socio más antiguo es: ");
         CNDEF.mayorAntigüedad2();
 
     }
