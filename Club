@@ -1,4 +1,5 @@
 import java.util.*;
+import javax.swing.JOptionPane;
 
 public class Club {
 
@@ -15,7 +16,7 @@ public class Club {
         this.Socios.add(socio);
     }
 
-    /*public void mayorAntigüedad(Socio socio1, Socio socio2, Socio socio3) {
+    /* public void mayorAntigüedad(Socio socio1, Socio socio2, Socio socio3) {
 
         if (socio1.getAntigüedad() > socio2.getAntigüedad() && socio1.getAntigüedad() > socio3.getAntigüedad()) {
             System.out.println("El socio más antiguo es " + socio1.getNombre() + " con " + socio1.getAntigüedad() + " años de antigüedad");
@@ -26,7 +27,7 @@ public class Club {
         if (socio3.getAntigüedad() > socio1.getAntigüedad() && socio3.getAntigüedad() > socio2.getAntigüedad()) {
             System.out.println("El socio más antiguo es " + socio1.getNombre() + " con " + socio1.getAntigüedad() + " años de antigüedad");
         }
-    }*/
+    } */
 
     public void mayorAntigüedad2() {
 
@@ -36,12 +37,14 @@ public class Club {
         int mayor = Collections.max(Antigüedades);
         for (Socio soc : Socios) {
             if (soc.getAntigüedad() == mayor) {
-                System.out.println(soc.getNombre() + " con " + soc.getAntigüedad() + " años de antigüedad");
+                //System.out.println(soc.getNombre() + " con " + soc.getAntigüedad() + " años de antigüedad");
+                JOptionPane.showMessageDialog(null, "El socio más antiguo es " + soc.getNombre() + " con " + soc.getAntigüedad() + " años de antigüedad");
             }
         }
     }
 
     public static void main(String[] args) {
+        
 
         Club CNDEF = new Club();
         Socio socio1 = new Socio();
@@ -54,14 +57,16 @@ public class Club {
 
         //CNDEF.mayorAntigüedad(socio1, socio2, socio3);
         
-        System.out.println("El socio más antiguo es: ");
+        //System.out.println("El socio más antiguo es: ");
         CNDEF.mayorAntigüedad2();
-
+        
     }
 }
---------------------------------------------------------------------------------------------------------
 
-import java.util.*;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//import java.util.*;
+import javax.swing.JOptionPane;
 
 public class Socio {
 
@@ -69,11 +74,11 @@ public class Socio {
     private int antigüedad;
 
     public Socio() {
-        Scanner sc = new Scanner (System.in);
-        System.out.println("Ingrese nombre de socio");
-        nombre = sc.nextLine();
-        System.out.println("Ingrese años de antigüedad");
-        antigüedad = sc.nextInt();
+        //Scanner sc = new Scanner (System.in);
+        //System.out.println("Ingrese nombre de socio");
+        nombre = JOptionPane.showInputDialog("Ingrese nombre de socio");
+        //System.out.println("Ingrese años de antigüedad");
+        antigüedad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese antigüedad en años"));
     }
 
     @Override
@@ -99,3 +104,4 @@ public class Socio {
     }
 
 }
+
