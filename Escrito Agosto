@@ -1,0 +1,108 @@
+import java.time.LocalDate;
+import java.util.*;
+
+public class MainEscritoAgosto {
+
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        LocalDate fecha = LocalDate.now();
+
+        Venta ventahoy = new Venta(fecha);
+
+        int op, venta;
+
+        do {
+            System.out.println("######## MENÚ ########");
+            System.out.println("");
+            System.out.println("              " + fecha);
+            System.out.println("");
+            System.out.println("1.          Ingresar nueva venta");
+            System.out.println("2.          Ver estadísticas");
+            System.out.println("0.          Salir");
+
+            op = sc.nextInt();
+
+            switch (op) {
+                case 1:
+                    System.out.println("Ingrese importe");
+                    venta = sc.nextInt();
+                    ventahoy.setTotal(venta);
+                    ventahoy.setMáxima(venta);
+                    ventahoy.setCantidad();
+                    System.out.println("");
+                    System.out.println("Venta ingresada");
+                    System.out.println("");
+                    break;
+                case 2:
+                    ventahoy.estadisticas();
+                    break;
+                case 0:
+                    System.out.println("Hasta luego!");
+                    break;
+                default:
+                    System.out.println("Opción incorrecta");
+                    break;
+            }
+        } while (op != 0);
+
+    }
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+import java.time.LocalDate;
+
+public class Venta {
+
+    private LocalDate fecha;
+    private int total;
+    private int máxima;
+    private int cantidad;
+
+    public Venta(LocalDate fecha) {
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public int getMáxima() {
+        return máxima;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setTotal(int venta) {
+      this.total += venta;
+    }
+
+    public void setMáxima(int venta) {
+        if (venta > máxima){
+            máxima = venta;
+        }
+    }
+
+    public void setCantidad() {
+        cantidad++;
+    }
+    
+    public void estadisticas() {
+        System.out.println("#### Estadísticas ####");
+        System.out.println("Ventas totales: " + total);
+        System.out.println("Venta mayor: " + máxima);
+        System.out.println("Cantidad: " + cantidad);
+    }
+
+}
