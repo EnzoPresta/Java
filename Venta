@@ -13,22 +13,22 @@ public class MainVenta {
         this.Ventas.add(venta);
     }
     
-    public double totalventa() {
+    public int totalventa() {
         int total = 0;
         for (Venta ven : Ventas) {
-            total += ven.getImporte();
+            total += (int)ven.getImporte();
         }
         return total;
     }
 
-    public double maxima() {
-        double max = 0;
+    public int maxima() {
+        ArrayList<Integer> Valores;
+        Valores = new ArrayList<>();
         for (Venta ven : Ventas) {
-            if (ven.getImporte() > max){
-                max = ven.getImporte();
-            }
+            Valores.add((int)ven.getImporte());
         }
-        return max;
+        int maxima = Collections.max(Valores);
+        return maxima;
     }
     
     public int cantidad() {
@@ -120,7 +120,7 @@ public class Venta {
     private int tipo_cliente;
 
     public Venta() {
-        codigo_articulo = JOptionPane.showInputDialog("Ingrese código");
+        codigo_articulo = JOptionPane.showInputDialog("Ingrese código de artículo");
         importe = Double.parseDouble(JOptionPane.showInputDialog("Ingrese importe"));
         medio_pago = Integer.parseInt(JOptionPane.showInputDialog("""
             Ingrese medio de pago:
@@ -140,13 +140,14 @@ public class Venta {
     }
 
     public double getImporte() {
-        if (tipo_cliente == 2) {
-            importe = importe * 0.8;
+        switch (tipo_cliente) {
+            case 2:
+                return importe * 0.8;
+            case 3:
+                return importe * 0.75;
+            default:
+                return importe;
         }
-        if (tipo_cliente == 3) {
-            importe = importe * 0.75;
-        }
-        return importe;
     }
 
     public String getCodigo_articulo() {
@@ -160,7 +161,6 @@ public class Venta {
     public int getTipo_cliente() {
         return tipo_cliente;
     }
-    
 
     public void setCodigo_articulo(String codigo_articulo) {
         this.codigo_articulo = codigo_articulo;
@@ -177,6 +177,5 @@ public class Venta {
     public void setTipo_cliente(int tipo_cliente) {
         this.tipo_cliente = tipo_cliente;
     }
-    
 
 }
