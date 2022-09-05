@@ -1,0 +1,182 @@
+import javax.swing.JOptionPane;
+import java.util.*;
+
+public class MainVenta {
+
+    private ArrayList<Venta> Ventas;
+
+    public MainVenta() {
+        Ventas = new ArrayList<>();
+    }
+    
+    public void agregar(Venta venta) {
+        this.Ventas.add(venta);
+    }
+    
+    public double totalventa() {
+        int total = 0;
+        for (Venta ven : Ventas) {
+            total += ven.getImporte();
+        }
+        return total;
+    }
+
+    public double maxima() {
+        double max = 0;
+        for (Venta ven : Ventas) {
+            if (ven.getImporte() > max){
+                max = ven.getImporte();
+            }
+        }
+        return max;
+    }
+    
+    public int cantidad() {
+        return Ventas.size();
+    }
+    
+    public int efectivo() {
+        int total = 0;
+        for (Venta ven : Ventas) {
+            if (ven.getMedio_pago() == 1) {
+                total++;
+            }
+        }
+        return total;
+    }
+    
+    public int tarjeta() {
+        int total = 0;
+        for (Venta ven : Ventas) {
+            if (ven.getMedio_pago() == 2) {
+                total++;
+            }
+        }
+        return total;
+    }
+    
+    public int QR() {
+        int total = 0;
+        for (Venta ven : Ventas) {
+            if (ven.getMedio_pago() == 3) {
+                total++;
+            }
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+
+        MainVenta empresa = new MainVenta();
+
+        int op;
+
+        do {
+            op = Integer.parseInt(JOptionPane.showInputDialog("""
+                1.       Ingresar nueva venta
+                2.       Ver estadísticas
+                3.       Salir"""));
+
+            switch (op) {
+                case 1:
+                    Venta ventahoy = new Venta();
+                    empresa.agregar(ventahoy);
+                    JOptionPane.showMessageDialog(null, "Venta ingresada");
+                    break;
+
+                case 2:
+                    JOptionPane.showMessageDialog(null,
+                        "Ventas totales: $ " + empresa.totalventa() + "\n" + 
+                        "Mayor ticket: $ " + empresa.maxima() + "\n" + 
+                        "Cantidad de ventas: " + empresa.cantidad() + "\n" +
+                        "Con efectivo: " + empresa.efectivo() + "\n" + 
+                        "Con tarjeta: " + empresa.tarjeta() + "\n" + 
+                        "Con código QR: " + empresa.QR());
+                    break;
+                    
+                case 3:
+                    JOptionPane.showMessageDialog(null, "Hasta luego!");
+                    System.exit(0);
+                    break;
+                    
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción incorrecta, intente nuevamente");
+                    break;
+            }
+        } while (op != 0);
+
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+import javax.swing.JOptionPane;
+
+public class Venta {
+
+    private String codigo_articulo;
+    private double importe;
+    private int medio_pago;
+    private int tipo_cliente;
+
+    public Venta() {
+        codigo_articulo = JOptionPane.showInputDialog("Ingrese código");
+        importe = Double.parseDouble(JOptionPane.showInputDialog("Ingrese importe"));
+        medio_pago = Integer.parseInt(JOptionPane.showInputDialog("""
+            Ingrese medio de pago:
+            1.       Efectivo
+            2.       Tarjeta de débito/crédito
+            3.       Código QR"""));
+        tipo_cliente = Integer.parseInt(JOptionPane.showInputDialog("""
+            Ingrese tipo de cliente:
+            1.       Corriente
+            2.       Funcionario (-20%)
+            3.       Beneficiario descuento Banco (-25%)"""));
+    }
+
+    @Override
+    public String toString() {
+        return "El articulo " + codigo_articulo + "tiene un precio de " + importe;
+    }
+
+    public double getImporte() {
+        if (tipo_cliente == 2) {
+            importe = importe * 0.8;
+        }
+        if (tipo_cliente == 3) {
+            importe = importe * 0.75;
+        }
+        return importe;
+    }
+
+    public String getCodigo_articulo() {
+        return codigo_articulo;
+    }
+
+    public int getMedio_pago() {
+        return medio_pago;
+    }
+
+    public int getTipo_cliente() {
+        return tipo_cliente;
+    }
+    
+
+    public void setCodigo_articulo(String codigo_articulo) {
+        this.codigo_articulo = codigo_articulo;
+    }
+
+    public void setImporte(double importe) {
+        this.importe = importe;
+    }
+
+    public void setMedio_pago(int medio_pago) {
+        this.medio_pago = medio_pago;
+    }
+
+    public void setTipo_cliente(int tipo_cliente) {
+        this.tipo_cliente = tipo_cliente;
+    }
+    
+
+}
