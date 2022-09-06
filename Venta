@@ -1,40 +1,57 @@
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.util.*;
+import java.awt.*;
 
-public class MainVenta {
+public class MainVenta extends JFrame {
 
     private ArrayList<Venta> Ventas;
 
     public MainVenta() {
         Ventas = new ArrayList<>();
+        setTitle("Precios");
+        setBounds(300,300,400,200);
+        Object[][] datos = {
+            {"0201", "Remera básica hombre", 549},
+            {"0241", "Remera básica mujer", 549},
+            {"E50L", "Pantalón deportivo adulto", 1199},
+            {"E50J", "Pantalón deportivo niño", 899},
+            {"E402", "Campera deportiva adulto", 1399}
+        };
+        String[] columnas = {"Código", "Descripción", "Precio"};
+
+        JTable table = new JTable(datos, columnas);
+        table.setPreferredScrollableViewportSize(new Dimension(500, 80));
+
+        add(new JScrollPane (table), BorderLayout.CENTER);
+
     }
-    
+
     public void agregar(Venta venta) {
         this.Ventas.add(venta);
     }
-    
+
     public int totalventa() {
         int total = 0;
         for (Venta ven : Ventas) {
-            total += (int)ven.getImporte();
+            total += (int) ven.getImporte();
         }
         return total;
     }
 
     public int maxima() {
-        ArrayList<Integer> Valores;
-        Valores = new ArrayList<>();
+        ArrayList<Integer> Importes_Enteros;
+        Importes_Enteros = new ArrayList<>();
         for (Venta ven : Ventas) {
-            Valores.add((int)ven.getImporte());
+            Importes_Enteros.add((int) ven.getImporte());
         }
-        int maxima = Collections.max(Valores);
+        int maxima = Collections.max(Importes_Enteros);
         return maxima;
     }
-    
+
     public int cantidad() {
         return Ventas.size();
     }
-    
+
     public int efectivo() {
         int total = 0;
         for (Venta ven : Ventas) {
@@ -44,7 +61,7 @@ public class MainVenta {
         }
         return total;
     }
-    
+
     public int tarjeta() {
         int total = 0;
         for (Venta ven : Ventas) {
@@ -54,7 +71,7 @@ public class MainVenta {
         }
         return total;
     }
-    
+
     public int QR() {
         int total = 0;
         for (Venta ven : Ventas) {
@@ -71,43 +88,52 @@ public class MainVenta {
 
         int op;
 
-        do {
-            op = Integer.parseInt(JOptionPane.showInputDialog("""
+        try {
+            do {
+                op = Integer.parseInt(JOptionPane.showInputDialog("""
                 1.       Ingresar nueva venta
-                2.       Ver estadísticas
-                3.       Salir"""));
+                2.       Ver lista de precios                                                                                           
+                3.       Ver estadísticas
+                4.       Salir"""));
 
-            switch (op) {
-                case 1:
-                    Venta ventahoy = new Venta();
-                    empresa.agregar(ventahoy);
-                    JOptionPane.showMessageDialog(null, "Venta ingresada");
-                    break;
+                switch (op) {
+                    case 1:
+                        Venta ventahoy = new Venta();
+                        empresa.agregar(ventahoy);
+                        JOptionPane.showMessageDialog(null, "Venta ingresada");
+                        break;
 
-                case 2:
-                    JOptionPane.showMessageDialog(null,
-                        "Ventas totales: $ " + empresa.totalventa() + "\n" + 
-                        "Mayor ticket: $ " + empresa.maxima() + "\n" + 
-                        "Cantidad de ventas: " + empresa.cantidad() + "\n" +
-                        "Con efectivo: " + empresa.efectivo() + "\n" + 
-                        "Con tarjeta: " + empresa.tarjeta() + "\n" + 
-                        "Con código QR: " + empresa.QR());
-                    break;
-                    
-                case 3:
-                    JOptionPane.showMessageDialog(null, "Hasta luego!");
-                    System.exit(0);
-                    break;
-                    
-                default:
-                    JOptionPane.showMessageDialog(null, "Opción incorrecta, intente nuevamente");
-                    break;
-            }
-        } while (op != 0);
+                    case 2:
+                        empresa.pack();
+                        empresa.setVisible(true);
+                        break;
 
+                    case 3:
+                        JOptionPane.showMessageDialog(null,
+                                "Ventas totales: $ " + empresa.totalventa() + "\n"
+                                + "Mayor ticket: $ " + empresa.maxima() + "\n"
+                                + "Cantidad de ventas: " + empresa.cantidad() + "\n"
+                                + "Con efectivo: " + empresa.efectivo() + "\n"
+                                + "Con tarjeta: " + empresa.tarjeta() + "\n"
+                                + "Con código QR: " + empresa.QR());
+                        break;
+
+                    case 4:
+                        JOptionPane.showMessageDialog(null, "Hasta luego!");
+                        System.exit(0);
+                        break;
+
+                    default:
+                        JOptionPane.showMessageDialog(null, "Opción incorrecta, intente nuevamente");
+                        break;
+                }
+            } while (op != 0);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Algo salió mal, reinicie el programa");
+        }
     }
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 import javax.swing.JOptionPane;
