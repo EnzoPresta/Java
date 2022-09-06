@@ -64,6 +64,9 @@ public class MainVenta {
         }
         return total;
     }
+    
+    
+    
 
     public static void main(String[] args) {
 
@@ -92,6 +95,7 @@ public class MainVenta {
                         break;
 
                     case 3:
+                    try {
                         JOptionPane.showMessageDialog(null,
                                 "Ventas totales: $ " + empresa.totalventa() + "\n"
                                 + "Mayor ticket: $ " + empresa.maxima() + "\n"
@@ -99,7 +103,10 @@ public class MainVenta {
                                 + "Con efectivo: " + empresa.efectivo() + "\n"
                                 + "Con tarjeta: " + empresa.tarjeta() + "\n"
                                 + "Con código QR: " + empresa.QR());
-                        break;
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "No hay registros aún");
+                    }
+                    break;
 
                     case 4:
                         JOptionPane.showMessageDialog(null, "Hasta luego!");
@@ -113,10 +120,11 @@ public class MainVenta {
             } while (op != 0);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Algo salió mal, reinicie el programa");
+            JOptionPane.showMessageDialog(null, "Algo salió mal, reinicie el programa e intente nuevamente");
         }
     }
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 import javax.swing.JOptionPane;
